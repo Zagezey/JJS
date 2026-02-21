@@ -1,0 +1,207 @@
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local UIS = game:GetService("UserInputService")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+screenGui.ResetOnSpawn = false
+
+-- Main Frame (Small & Clean)
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 190)
+frame.Position = UDim2.new(0.5, -150, 0.5, -95)
+frame.BackgroundColor3 = Color3.fromRGB(15,15,15)
+frame.BorderSizePixel = 3
+frame.Parent = screenGui
+
+-- Rainbow Border Animation
+task.spawn(function()
+    while true do
+        for hue = 0,1,0.01 do
+            frame.BorderColor3 = Color3.fromHSV(hue,1,1)
+            task.wait(0.03)
+        end
+    end
+end)
+
+-- Title Bar
+local titleBar = Instance.new("TextLabel")
+titleBar.Size = UDim2.new(1, 0, 0, 30)
+titleBar.BackgroundColor3 = Color3.fromRGB(25,25,25)
+titleBar.Text = "This Script Was Made By Zuyi"
+titleBar.TextColor3 = Color3.new(1,1,1)
+titleBar.Font = Enum.Font.GothamBold
+titleBar.TextSize = 13
+titleBar.Parent = frame
+
+-- Key TextBox
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(0.85, 0, 0, 30)
+textBox.Position = UDim2.new(0.075, 0, 0.35, 0)
+textBox.BackgroundColor3 = Color3.fromRGB(30,30,30)
+textBox.PlaceholderText = "Enter Key Here..."
+textBox.Text = ""
+textBox.TextColor3 = Color3.new(1,1,1)
+textBox.Font = Enum.Font.Gotham
+textBox.TextSize = 14
+textBox.Parent = frame
+
+-- GET KEY Button
+local getKeyButton = Instance.new("TextButton")
+getKeyButton.Size = UDim2.new(0.85, 0, 0, 28)
+getKeyButton.Position = UDim2.new(0.075, 0, 0.6, 0)
+getKeyButton.BackgroundColor3 = Color3.fromRGB(40,40,40)
+getKeyButton.Text = "GET KEY"
+getKeyButton.TextColor3 = Color3.new(1,1,1)
+getKeyButton.Font = Enum.Font.GothamBold
+getKeyButton.TextSize = 13
+getKeyButton.Parent = frame
+
+-- ENTER Button
+local enterButton = Instance.new("TextButton")
+enterButton.Size = UDim2.new(0.85, 0, 0, 28)
+enterButton.Position = UDim2.new(0.075, 0, 0.78, 0)
+enterButton.BackgroundColor3 = Color3.fromRGB(55,55,55)
+enterButton.Text = "ENTER"
+enterButton.TextColor3 = Color3.new(1,1,1)
+enterButton.Font = Enum.Font.GothamBold
+enterButton.TextSize = 13
+enterButton.Parent = frame
+
+-- Notification Function
+local function sendNotification(title, text, duration)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = title;
+        Text = text;
+        Duration = duration;
+    })
+end
+
+-- Function to copy text to clipboard
+local function copyToClipboard(text)
+    local success = pcall(function()
+        -- Try different methods for different executors
+        if setclipboard then
+            setclipboard(text)
+        elseif writeclipboard then
+            writeclipboard(text)
+        elseif toclipboard then
+            toclipboard(text)
+        elseif syn and syn.write_clipboard then
+            syn.write_clipboard(text)
+        end
+    end)
+    
+    return success
+end
+
+-- Function to open URL
+local function openURL(url)
+    local success = pcall(function()
+        -- Try different methods for different executors
+        if request then
+            request({
+                Url = url,
+                Method = "GET"
+            })
+        elseif syn and syn.request then
+            syn.request({
+                Url = url,
+                Method = "GET"
+            })
+        elseif http_request then
+            http_request({
+                Url = url,
+                Method = "GET"
+            })
+        else
+            -- Fallback method
+            game:GetService("TeleportService"):Teleport(game.PlaceId)
+        end
+    end)
+    
+    return success
+end
+
+-- GET KEY Button Action - Now opens the Pastebin link
+getKeyButton.MouseButton1Click:Connect(function()
+    sendNotification("Key System", "Opening Pastebin link...", 5)
+    
+    -- Copy the link to clipboard
+    local clipboardSuccess = copyToClipboard("https://pastebin.com/g8FG1Pju")
+    
+    -- Try to open the URL
+    local urlSuccess = openURL("https://pastebin.com/g8FG1Pju")
+    
+    if clipboardSuccess then
+        sendNotification("Success", "Link copied to clipboard!", 5)
+    elseif urlSuccess then
+        sendNotification("Success", "Opening Pastebin...", 5)
+    else
+        sendNotification("Info", "Please manually visit: pastebin.com/g8FG1Pju", 10)
+    end
+end)
+
+-- ENTER Button Action
+enterButton.MouseButton1Click:Connect(function()
+    local enteredKey = textBox.Text
+    
+    if enteredKey == "presidentzuyi67" then
+        sendNotification("Success", "Correct Key! Loading script...", 5)
+        
+        -- Destroy the GUI first
+        screenGui:Destroy()
+        
+        -- Load the external script
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hzhzhzsjjs/Zhzh/refs/heads/main/anykillszuyi.lua.txt"))()
+        
+        -- Optional: Send a confirmation notification after loading
+        task.wait(1)
+        sendNotification("Script Loaded", "External script has been successfully loaded!", 5)
+    else
+        sendNotification("Wrong Key", "That key is incorrect.", 5)
+    end
+end)
+
+-- Draggable System
+local dragging = false
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    frame.Position = UDim2.new(
+        startPos.X.Scale,
+        startPos.X.Offset + delta.X,
+        startPos.Y.Scale,
+        startPos.Y.Offset + delta.Y
+    )
+end
+
+titleBar.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+titleBar.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UIS.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
