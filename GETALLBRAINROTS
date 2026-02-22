@@ -1,0 +1,135 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "AnimeKeyGUI"
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+-- Main Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 400, 0, 250)
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.Position = UDim2.new(0.5, 0, 0.5, 0) -- Center of screen
+frame.BackgroundColor3 = Color3.fromRGB(15, 15, 30)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+frame.Active = true
+frame.Draggable = true
+
+-- Rainbow LED Bar
+local led = Instance.new("Frame")
+led.Size = UDim2.new(1, 0, 0, 10)
+led.Position = UDim2.new(0, 0, 0, 0)
+led.BorderSizePixel = 0
+led.Parent = frame
+
+-- Animate Rainbow LED
+spawn(function()
+    local hue = 0
+    while true do
+        hue = (hue + 0.01) % 1
+        led.BackgroundColor3 = Color3.fromHSV(hue, 1, 1)
+        wait(0.03)
+    end
+end)
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 50)
+title.Position = UDim2.new(0,0,0,10)
+title.BackgroundTransparency = 1
+title.Text = "GET ALL BRAINROTS"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.Fantasy
+title.TextScaled = true
+title.Parent = frame
+
+-- Key TextBox
+local keyBox = Instance.new("TextBox")
+keyBox.Size = UDim2.new(0.8, 0, 0, 40)
+keyBox.Position = UDim2.new(0.1, 0, 0, 80)
+keyBox.PlaceholderText = "Enter your key..."
+keyBox.BackgroundColor3 = Color3.fromRGB(30, 30, 50)
+keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+keyBox.Font = Enum.Font.Gotham
+keyBox.TextScaled = true
+keyBox.ClearTextOnFocus = false
+keyBox.Parent = frame
+
+-- Get Key Button
+local getKeyBtn = Instance.new("TextButton")
+getKeyBtn.Size = UDim2.new(0.35, 0, 0, 40)
+getKeyBtn.Position = UDim2.new(0.1, 0, 0, 140)
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 80)
+getKeyBtn.TextColor3 = Color3.fromRGB(255,255,255)
+getKeyBtn.Font = Enum.Font.Fantasy
+getKeyBtn.TextScaled = true
+getKeyBtn.Text = "Get Key"
+getKeyBtn.Parent = frame
+
+-- Check Key Button
+local checkKeyBtn = Instance.new("TextButton")
+checkKeyBtn.Size = UDim2.new(0.35, 0, 0, 40)
+checkKeyBtn.Position = UDim2.new(0.55, 0, 0, 140)
+checkKeyBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 80)
+checkKeyBtn.TextColor3 = Color3.fromRGB(255,255,255)
+checkKeyBtn.Font = Enum.Font.Fantasy
+checkKeyBtn.TextScaled = true
+checkKeyBtn.Text = "Check Key"
+checkKeyBtn.Parent = frame
+
+-- Notification Label
+local notification = Instance.new("TextLabel")
+notification.Size = UDim2.new(1, -20, 0, 30)
+notification.Position = UDim2.new(0,10,0,200)
+notification.BackgroundTransparency = 1
+notification.TextColor3 = Color3.fromRGB(255,100,100)
+notification.Font = Enum.Font.GothamBold
+notification.TextScaled = true
+notification.Text = ""
+notification.TextWrapped = true
+notification.Parent = frame
+
+-- Sound Setup
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://116513148809589"
+sound.Volume = 1
+sound.Parent = frame
+
+-- Get Key Button Function
+getKeyBtn.MouseButton1Click:Connect(function()
+    if setclipboard then
+        setclipboard("https://link-hub.net/1288118/ia1iIr0jGZCU") -- copy silently
+        notification.TextColor3 = Color3.fromRGB(100,255,100)
+        notification.Text = "🌈 Key link copied!"
+        sound:Play() -- play click sound
+    else
+        notification.TextColor3 = Color3.fromRGB(255,100,100)
+        notification.Text = "Clipboard not supported!"
+    end
+end)
+
+-- Check Key Button Function
+checkKeyBtn.MouseButton1Click:Connect(function()
+    local key = keyBox.Text
+    if key == "MainZuyi" then
+        notification.TextColor3 = Color3.fromRGB(100,255,100)
+        notification.Text = "✅ Key valid!"
+        sound:Play() -- play correct key sound
+        
+        -- Load external script only if key is correct
+        local success, err = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/youfellforitnigga/LuaFluentDependancies/refs/heads/Mjsain/main.lua"))()
+        end)
+        if not success then
+            warn("Failed to load script:", err)
+        end
+        
+        -- Destroy the key system GUI
+        screenGui:Destroy()
+    else
+        notification.TextColor3 = Color3.fromRGB(255,100,100)
+        notification.Text = "❌ Invalid key!"
+    end
+end)
