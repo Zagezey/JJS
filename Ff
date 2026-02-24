@@ -1,0 +1,127 @@
+-- Legit Roblox Studio Key System (Place in StarterGui as LocalScript)
+
+local VALID_KEY = "KEY123"
+local KEY_LINK = "https://pastebin.com/g8FG1Pju"
+
+local Players = game:GetService("Players")
+local GuiService = game:GetService("GuiService")
+local player = Players.LocalPlayer
+
+-- Create GUI
+local gui = Instance.new("ScreenGui")
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 350, 0, 200)
+frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+frame.BorderSizePixel = 0
+frame.Parent = gui
+
+local corner = Instance.new("UICorner", frame)
+corner.CornerRadius = UDim.new(0, 12)
+
+-- Title
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Position = UDim2.new(0,0,0,0)
+title.BackgroundTransparency = 1
+title.Text = "🔐 Key System"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 22
+title.TextColor3 = Color3.new(1,1,1)
+
+-- TextBox
+local box = Instance.new("TextBox", frame)
+box.Size = UDim2.new(0.8, 0, 0, 40)
+box.Position = UDim2.new(0.1, 0, 0, 60)
+box.PlaceholderText = "Enter key..."
+box.Font = Enum.Font.Gotham
+box.TextSize = 18
+box.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+box.TextColor3 = Color3.new(1,1,1)
+
+Instance.new("UICorner", box).CornerRadius = UDim.new(0,8)
+
+-- Feedback Label
+local feedback = Instance.new("TextLabel", frame)
+feedback.Size = UDim2.new(1, 0, 0, 25)
+feedback.Position = UDim2.new(0, 0, 0, 105)
+feedback.BackgroundTransparency = 1
+feedback.Text = ""
+feedback.Font = Enum.Font.GothamBold
+feedback.TextSize = 16
+
+-- Check Button
+local check = Instance.new("TextButton", frame)
+check.Size = UDim2.new(0.35, 0, 0, 40)
+check.Position = UDim2.new(0.1, 0, 0, 140)
+check.Text = "Check Key"
+check.Font = Enum.Font.GothamBold
+check.TextSize = 16
+check.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+check.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", check).CornerRadius = UDim.new(0,8)
+
+-- Get Key Button
+local getKey = Instance.new("TextButton", frame)
+getKey.Size = UDim2.new(0.35, 0, 0, 40)
+getKey.Position = UDim2.new(0.55, 0, 0, 140)
+getKey.Text = "Get Key"
+getKey.Font = Enum.Font.GothamBold
+getKey.TextSize = 16
+getKey.BackgroundColor3 = Color3.fromRGB(120, 0, 255)
+getKey.TextColor3 = Color3.new(1,1,1)
+Instance.new("UICorner", getKey).CornerRadius = UDim.new(0,8)
+
+-- Tween Service for hover effects
+local TweenService = game:GetService("TweenService")
+local function tweenButton(button, color)
+    local tween = TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = color})
+    tween:Play()
+end
+
+-- Hover Effects
+check.MouseEnter:Connect(function() tweenButton(check, Color3.fromRGB(0,200,255)) end)
+check.MouseLeave:Connect(function() tweenButton(check, Color3.fromRGB(0,170,255)) end)
+getKey.MouseEnter:Connect(function() tweenButton(getKey, Color3.fromRGB(150,0,255)) end)
+getKey.MouseLeave:Connect(function() tweenButton(getKey, Color3.fromRGB(120,0,255)) end)
+
+-- Check Key Logic
+check.MouseButton1Click:Connect(function()
+    if box.Text == VALID_KEY then
+        feedback.Text = "✅ Key Accepted!"
+        feedback.TextColor3 = Color3.fromRGB(0,255,0)
+        wait(0.5)
+        gui:Destroy()
+    else
+        feedback.Text = "❌ Invalid Key!"
+        feedback.TextColor3 = Color3.fromRGB(255,0,0)
+        -- Shake animation
+        for i = 1, 3 do
+            frame.Position = frame.Position + UDim2.new(0,10,0,0)
+            wait(0.05)
+            frame.Position = frame.Position - UDim2.new(0,20,0,0)
+            wait(0.05)
+            frame.Position = frame.Position + UDim2.new(0,10,0,0)
+        end
+    end
+end)
+
+-- Get Key Logic (Studio Safe)
+getKey.MouseButton1Click:Connect(function()
+    -- Open link in browser
+    pcall(function() GuiService:OpenBrowserWindow(KEY_LINK) end)
+    
+    -- Copy to clipboard
+    if setclipboard then
+        pcall(function() setclipboard(KEY_LINK) end)
+        feedback.Text = "🌐 Key copied to clipboard!"
+        feedback.TextColor3 = Color3.fromRGB(0,170,255)
+    else
+        feedback.Text = "🌐 Key link opened!"
+        feedback.TextColor3 = Color3.fromRGB(0,170,255)
+    end
+end)
