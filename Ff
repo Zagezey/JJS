@@ -1,6 +1,6 @@
 -- Legit Roblox Studio Key System (Place in StarterGui as LocalScript)
 
-local VALID_KEY = "KEY123"
+local VALID_KEY = "PresidentZuyi123"
 local KEY_LINK = "https://linkvertise.com/1288118/uuu?o=sharing"
 
 local Players = game:GetService("Players")
@@ -92,7 +92,7 @@ getKey.MouseLeave:Connect(function() tweenButton(getKey, Color3.fromRGB(120,0,25
 -- Check Key Logic
 check.MouseButton1Click:Connect(function()
     if box.Text == VALID_KEY then
-        feedback.Text = "✅ Key Accepted!"
+        feedback.Text = "Key Will Work In 8 Hours!"
         feedback.TextColor3 = Color3.fromRGB(0,255,0)
         wait(0.5)
         gui:Destroy()
