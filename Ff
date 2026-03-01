@@ -1,7 +1,7 @@
 -- Legit Roblox Studio Key System (Place in StarterGui as LocalScript)
 
 local VALID_KEY = "KEY123"
-local KEY_LINK = "https://pastebin.com/g8FG1Pju"
+local KEY_LINK = "https://linkvertise.com/1288118/uuu?o=sharing"
 
 local Players = game:GetService("Players")
 local GuiService = game:GetService("GuiService")
@@ -113,11 +113,11 @@ end)
 -- Get Key Logic (Studio Safe)
 getKey.MouseButton1Click:Connect(function()
     -- Open link in browser
-    pcall(function() GuiService:OpenBrowserWindow(https://link-target.net/1288118/uuu) end)
+    pcall(function() GuiService:OpenBrowserWindow(KEY_LINK) end)
     
     -- Copy to clipboard
     if setclipboard then
-        pcall(function() setclipboard(https://link-target.net/1288118/uuu) end)
+        pcall(function() setclipboard(KEY_LINK) end)
         feedback.Text = "🌐 Key copied to clipboard!"
         feedback.TextColor3 = Color3.fromRGB(0,170,255)
     else
