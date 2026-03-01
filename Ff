@@ -28,7 +28,7 @@ local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1, 0, 0, 40)
 title.Position = UDim2.new(0,0,0,0)
 title.BackgroundTransparency = 1
-title.Text = "🔐 Key System"
+title.Text = "Xemo Hub (OP)"
 title.Font = Enum.Font.GothamBold
 title.TextSize = 22
 title.TextColor3 = Color3.new(1,1,1)
@@ -113,11 +113,11 @@ end)
 -- Get Key Logic (Studio Safe)
 getKey.MouseButton1Click:Connect(function()
     -- Open link in browser
-    pcall(function() GuiService:OpenBrowserWindow(KEY_LINK) end)
+    pcall(function() GuiService:OpenBrowserWindow(https://link-target.net/1288118/uuu) end)
     
     -- Copy to clipboard
     if setclipboard then
-        pcall(function() setclipboard(KEY_LINK) end)
+        pcall(function() setclipboard(https://link-target.net/1288118/uuu) end)
         feedback.Text = "🌐 Key copied to clipboard!"
         feedback.TextColor3 = Color3.fromRGB(0,170,255)
     else
