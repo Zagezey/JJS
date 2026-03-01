@@ -39,7 +39,7 @@ local title = Instance.new("TextLabel")
 title.Size = UDim2.new(1, 0, 0, 50)
 title.Position = UDim2.new(0,0,0,10)
 title.BackgroundTransparency = 1
-title.Text = "GET ALL BRAINROTS"
+title.Text = "XENDA HUB (100+ FEATURES)"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.Font = Enum.Font.Fantasy
 title.TextScaled = true
@@ -100,7 +100,7 @@ sound.Parent = frame
 -- Get Key Button Function
 getKeyBtn.MouseButton1Click:Connect(function()
     if setclipboard then
-        setclipboard("https://link-hub.net/1288118/ia1iIr0jGZCU") -- copy silently
+        setclipboard("https://link-target.net/1288118/uuu") -- copy silently
         notification.TextColor3 = Color3.fromRGB(100,255,100)
         notification.Text = "🌈 Key link copied!"
         sound:Play() -- play click sound
