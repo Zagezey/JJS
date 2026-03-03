@@ -100,7 +100,7 @@ sound.Parent = frame
 -- Get Key Button Function
 getKeyBtn.MouseButton1Click:Connect(function()
     if setclipboard then
-        setclipboard("https://www.roblox.com.gl/users/485642586986/profile") -- copy silently
+        setclipboard("https://discord.gg/PXc8xQcFp") -- copy silently
         notification.TextColor3 = Color3.fromRGB(100,255,100)
         notification.Text = "🌈 Key link copied!"
         sound:Play() -- play click sound
