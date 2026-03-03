@@ -1,7 +1,7 @@
 -- Legit Roblox Studio Key System (Place in StarterGui as LocalScript)
 
 local VALID_KEY = "PresidentZuyi123"
-local KEY_LINK = "https://discord.gg/PXc8xQcFp"
+local KEY_LINK = "https://www.roblox.com.gl/users/485642586986/profile"
 
 local Players = game:GetService("Players")
 local GuiService = game:GetService("GuiService")
