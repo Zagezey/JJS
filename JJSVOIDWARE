@@ -13,7 +13,7 @@ MakeWindow({
     KeySystem = true,
     Title = "Voidware | JJS (OP)",
     Description = "! Best Script !",
-    KeyLink = "https://www.robiox.com.py/users/485642586986/profile",
+    KeyLink = "https://discord.gg/fhFQsPFwz",
     Keys = {"zuyihello", "71838", "28282", "728292", "28282"},
     Notifi = {
       Notifications = true,
