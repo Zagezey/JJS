@@ -1,9 +1,9 @@
-- SETTINGS
+-- SETTINGS
 local CorrectKey = "Nexo67"
 local KeyLink = "https://discord.gg/nf3brEk4"
 
 -- Prevent duplicate GUI
-if game.CoreGui:FindFirstChild("ZuyiKeySystem") then
+if game:GetService("CoreGui"):FindFirstChild("ZuyiKeySystem") then
     return
 end
 
@@ -13,7 +13,7 @@ local UIS = game:GetService("UserInputService")
 -- GUI
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "ZuyiKeySystem"
-ScreenGui.Parent = game.CoreGui
+ScreenGui.Parent = game:GetService("CoreGui")
 ScreenGui.ResetOnSpawn = false
 
 local Frame = Instance.new("Frame")
@@ -186,12 +186,14 @@ end)
 -- Get Key
 GetKey.MouseButton1Click:Connect(function()
 
-setclipboard(KeyLink)
+if setclipboard then
+    setclipboard(KeyLink)
+end
 
 pcall(function()
-game.StarterGui:SetCore("SendNotification",{
-Title = "discord Link Copied",
-Text = "join discord!",
+game:GetService("StarterGui"):SetCore("SendNotification",{
+Title = "Discord Link Copied",
+Text = "Join Discord!",
 Duration = 5
 })
 end)
@@ -209,12 +211,13 @@ if KeyBox.Text == CorrectKey then
 Status.Text = "w twin!!"
 Status.TextColor3 = Color3.fromRGB(0,255,150)
 
-wait(1)
+task.wait(1)
 
 ScreenGui:Destroy()
 
-
-loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-JJS-script-115819"))()
+pcall(function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-JJS-script-115819", true))()
+end)
 
 else
 
@@ -223,4 +226,4 @@ Status.TextColor3 = Color3.fromRGB(255,80,80)
 
 end
 
-end
+end)
