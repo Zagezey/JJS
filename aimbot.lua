@@ -1,6 +1,6 @@
 -- SETTINGS
 local CorrectKey = "Hidden"
-local KeyLink = "https://www.roblox.com.gl/users/485642586986/profile"
+local KeyLink = "https://pastebin.com/ABC4fzeZ"
 
 -- Prevent duplicate GUI
 if game:GetService("CoreGui"):FindFirstChild("ZuyiKeySystem") then
