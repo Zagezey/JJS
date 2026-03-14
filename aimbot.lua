@@ -1,6 +1,6 @@
 -- SETTINGS
 local CorrectKey = "Hidden"
-local KeyLink = "https://pastebin.com/ABC4fzeZ"
+local KeyLink = "https://discord.gg/nf3brEk4"
 
 -- Prevent duplicate GUI
 if game:GetService("CoreGui"):FindFirstChild("ZuyiKeySystem") then
